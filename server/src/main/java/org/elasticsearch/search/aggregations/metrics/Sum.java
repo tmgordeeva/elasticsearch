@@ -53,7 +53,7 @@ public class Sum extends InternalNumericMetricsAggregation.SingleValue {
     }
 
     @Override
-    public Sum reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public Sum doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         // Compute the sum of double values with Kahan summation algorithm which is more
         // accurate than naive summation.
         CompensatedSum kahanSummation = new CompensatedSum(0, 0);

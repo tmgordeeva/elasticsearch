@@ -43,7 +43,7 @@ class TestMultiValueAggregation extends InternalNumericMetricsAggregation.MultiV
     }
 
     @Override
-    public InternalAggregation reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalAggregation doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         throw new UnsupportedOperationException();
     }
 

@@ -199,7 +199,7 @@ public class LongTerms extends InternalMappedTerms<LongTerms, LongTerms.Bucket> 
     }
 
     @Override
-    public InternalAggregation reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalAggregation doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         boolean unsignedLongFormat = false;
         boolean rawFormat = false;
         for (InternalAggregation agg : aggregations) {
@@ -226,7 +226,7 @@ public class LongTerms extends InternalMappedTerms<LongTerms, LongTerms.Bucket> 
             }
             return newAggs.get(0).reduce(newAggs, reduceContext);
         }
-        return super.reduce(aggregations, reduceContext);
+        return super.doReduce(aggregations, reduceContext);
     }
 
     @Override

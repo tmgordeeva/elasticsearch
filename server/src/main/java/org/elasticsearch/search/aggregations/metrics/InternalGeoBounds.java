@@ -74,7 +74,7 @@ public class InternalGeoBounds extends InternalBounds<GeoPoint> implements GeoBo
     }
 
     @Override
-    public InternalAggregation reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalAggregation doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         double top = Double.NEGATIVE_INFINITY;
         double bottom = Double.POSITIVE_INFINITY;
         double posLeft = Double.POSITIVE_INFINITY;

@@ -64,7 +64,7 @@ public class InternalChangePointAggregation extends InternalAggregation {
     }
 
     @Override
-    public InternalAggregation reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalAggregation doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         throw new UnsupportedOperationException("Reducing a change_point aggregation is not supported");
     }
 

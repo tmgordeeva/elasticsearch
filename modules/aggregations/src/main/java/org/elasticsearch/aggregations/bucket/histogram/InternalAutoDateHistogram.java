@@ -526,7 +526,7 @@ public final class InternalAutoDateHistogram extends InternalMultiBucketAggregat
     }
 
     @Override
-    public InternalAggregation reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalAggregation doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         BucketReduceResult reducedBucketsResult = reduceBuckets(aggregations, reduceContext);
 
         if (reduceContext.isFinalReduce()) {

@@ -269,7 +269,7 @@ public class InternalBoxplot extends InternalNumericMetricsAggregation.MultiValu
     }
 
     @Override
-    public InternalBoxplot reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalBoxplot doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         TDigestState merged = null;
         for (InternalAggregation aggregation : aggregations) {
             final InternalBoxplot percentiles = (InternalBoxplot) aggregation;

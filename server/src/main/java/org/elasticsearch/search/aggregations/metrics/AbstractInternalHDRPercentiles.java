@@ -121,7 +121,7 @@ abstract class AbstractInternalHDRPercentiles extends InternalNumericMetricsAggr
     }
 
     @Override
-    public AbstractInternalHDRPercentiles reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public AbstractInternalHDRPercentiles doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         DoubleHistogram merged = null;
         for (InternalAggregation aggregation : aggregations) {
             final AbstractInternalHDRPercentiles percentiles = (AbstractInternalHDRPercentiles) aggregation;

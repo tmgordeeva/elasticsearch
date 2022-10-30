@@ -176,7 +176,7 @@ public class InternalAdjacencyMatrix extends InternalMultiBucketAggregation<Inte
     }
 
     @Override
-    public InternalAggregation reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalAggregation doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         Map<String, List<InternalBucket>> bucketsMap = new HashMap<>();
         for (InternalAggregation aggregation : aggregations) {
             InternalAdjacencyMatrix filters = (InternalAdjacencyMatrix) aggregation;

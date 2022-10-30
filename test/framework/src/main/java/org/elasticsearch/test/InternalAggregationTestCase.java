@@ -345,6 +345,10 @@ public abstract class InternalAggregationTestCase<T extends InternalAggregation>
 
     protected abstract T createTestInstance(String name, Map<String, Object> metadata);
 
+    protected boolean shortcutInstances() {
+        return false;
+    }
+
     /** Return an instance on an unmapped field. */
     protected T createUnmappedInstance(String name, Map<String, Object> metadata) {
         // For most impls, we use the same instance in the unmapped case and in the mapped case
@@ -535,12 +539,18 @@ public abstract class InternalAggregationTestCase<T extends InternalAggregation>
     }
 
     public final void testFromXContent() throws IOException {
+        if (shortcutInstances()) {
+            return;
+        }
         final T aggregation = createTestInstanceForXContent();
         final ParsedAggregation parsedAggregation = parseAndAssert(aggregation, randomBoolean(), false);
         assertFromXContent(aggregation, parsedAggregation);
     }
 
     public final void testFromXContentWithRandomFields() throws IOException {
+        if (shortcutInstances()) {
+            return;
+        }
         final T aggregation = createTestInstanceForXContent();
         final ParsedAggregation parsedAggregation = parseAndAssert(aggregation, randomBoolean(), true);
         assertFromXContent(aggregation, parsedAggregation);
@@ -585,7 +595,6 @@ public abstract class InternalAggregationTestCase<T extends InternalAggregation>
         final boolean shuffled,
         final boolean addRandomFields
     ) throws IOException {
-
         final ToXContent.Params params = new ToXContent.MapParams(singletonMap(RestSearchAction.TYPED_KEYS_PARAM, "true"));
         final XContentType xContentType = randomFrom(XContentType.values());
         final boolean humanReadable = randomBoolean();

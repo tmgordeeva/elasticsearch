@@ -566,7 +566,7 @@ public class InternalMultiTerms extends AbstractInternalTerms<InternalMultiTerms
     }
 
     @Override
-    public InternalAggregation reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalAggregation doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         return reduce(aggregations, reduceContext, needsPromotionToDouble(aggregations));
     }
 

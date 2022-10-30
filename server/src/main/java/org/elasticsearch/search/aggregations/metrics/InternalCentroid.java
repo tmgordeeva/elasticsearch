@@ -95,7 +95,7 @@ public abstract class InternalCentroid extends InternalAggregation implements Ce
     protected abstract InternalCentroid copyWith(double firstSum, double secondSum, long totalCount);
 
     @Override
-    public InternalCentroid reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalCentroid doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         double firstSum = Double.NaN;
         double secondSum = Double.NaN;
         long totalCount = 0;

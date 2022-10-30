@@ -83,7 +83,7 @@ public class UnmappedRareTerms extends InternalRareTerms<UnmappedRareTerms, Unma
     }
 
     @Override
-    public InternalAggregation reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalAggregation doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         return new UnmappedRareTerms(name, metadata);
     }
 

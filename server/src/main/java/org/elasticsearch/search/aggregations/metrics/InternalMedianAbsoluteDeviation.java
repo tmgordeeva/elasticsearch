@@ -63,7 +63,7 @@ public class InternalMedianAbsoluteDeviation extends InternalNumericMetricsAggre
     }
 
     @Override
-    public InternalAggregation reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalAggregation doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         final TDigestState valueMerged = new TDigestState(valuesSketch.compression());
         for (InternalAggregation aggregation : aggregations) {
             final InternalMedianAbsoluteDeviation madAggregation = (InternalMedianAbsoluteDeviation) aggregation;

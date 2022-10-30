@@ -275,7 +275,7 @@ public class InternalExtendedStatsTests extends InternalAggregationTestCase<Inte
             aggregations.add(new InternalExtendedStats("dummy1", 1, 0.0, 0.0, 0.0, sumOfSqrs, sigma, null, null));
         }
         InternalExtendedStats stats = new InternalExtendedStats("dummy", 1, 0.0, 0.0, 0.0, 0.0, sigma, null, null);
-        InternalExtendedStats reduced = stats.reduce(aggregations, null);
+        InternalExtendedStats reduced = (InternalExtendedStats) stats.reduce(aggregations, null);
         assertEquals(expectedSumOfSqrs, reduced.getSumOfSquares(), delta);
     }
 }

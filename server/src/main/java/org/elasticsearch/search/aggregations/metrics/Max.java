@@ -70,7 +70,7 @@ public class Max extends InternalNumericMetricsAggregation.SingleValue {
     }
 
     @Override
-    public Max reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public Max doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         double max = Double.NEGATIVE_INFINITY;
         for (InternalAggregation aggregation : aggregations) {
             max = Math.max(max, ((Max) aggregation).max);

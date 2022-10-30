@@ -59,7 +59,7 @@ public class InternalValueCount extends InternalNumericMetricsAggregation.Single
     }
 
     @Override
-    public InternalAggregation reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalAggregation doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         long valueCount = 0;
         for (InternalAggregation aggregation : aggregations) {
             valueCount += ((InternalValueCount) aggregation).value;

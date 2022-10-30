@@ -480,7 +480,7 @@ public final class InternalDateHistogram extends InternalMultiBucketAggregation<
     }
 
     @Override
-    public InternalAggregation reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalAggregation doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         List<Bucket> reducedBuckets = reduceBuckets(aggregations, reduceContext);
         boolean alreadyAccountedForBuckets = false;
         if (reduceContext.isFinalReduce()) {

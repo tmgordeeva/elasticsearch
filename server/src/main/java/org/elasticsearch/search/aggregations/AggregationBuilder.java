@@ -202,6 +202,14 @@ public abstract class AggregationBuilder
         return false;
     }
 
+    /**
+     * Should we push this aggregation down for processing to data nodes?
+     * @return
+     */
+    public boolean shortcutResponses() {
+        return false;
+    }
+
     @Override
     public String toString() {
         return Strings.toString(this);

@@ -237,7 +237,7 @@ public class InternalMatrixStats extends InternalAggregation {
     }
 
     @Override
-    public InternalAggregation reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalAggregation doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         // merge stats across all shards
         List<InternalAggregation> aggs = new ArrayList<>(aggregations);
         aggs.removeIf(p -> ((InternalMatrixStats) p).stats == null);

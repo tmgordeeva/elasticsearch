@@ -105,7 +105,7 @@ public class UnmappedSignificantTerms extends InternalSignificantTerms<UnmappedS
     }
 
     @Override
-    public InternalAggregation reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalAggregation doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         return new UnmappedSignificantTerms(name, requiredSize, minDocCount, metadata);
     }
 

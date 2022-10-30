@@ -68,7 +68,7 @@ public class InternalRate extends InternalNumericMetricsAggregation.SingleValue 
     }
 
     @Override
-    public InternalRate reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalRate doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         // Compute the sum of double values with Kahan summation algorithm which is more
         // accurate than naive summation.
         CompensatedSum kahanSummation = new CompensatedSum(0, 0);

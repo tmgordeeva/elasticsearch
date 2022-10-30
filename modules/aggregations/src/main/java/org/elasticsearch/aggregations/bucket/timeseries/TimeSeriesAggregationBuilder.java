@@ -34,6 +34,9 @@ public class TimeSeriesAggregationBuilder extends AbstractAggregationBuilder<Tim
 
     private boolean keyed;
 
+    public static final ParseField IMPORTANT_FIELD = new ParseField("important");
+    private boolean important;
+
     static {
         InstantiatingObjectParser.Builder<TimeSeriesAggregationBuilder, String> parser = InstantiatingObjectParser.builder(
             NAME,
@@ -41,17 +44,19 @@ public class TimeSeriesAggregationBuilder extends AbstractAggregationBuilder<Tim
             TimeSeriesAggregationBuilder.class
         );
         parser.declareBoolean(optionalConstructorArg(), KEYED_FIELD);
+        parser.declareBoolean(optionalConstructorArg(), IMPORTANT_FIELD);
         PARSER = parser.build();
     }
 
     public TimeSeriesAggregationBuilder(String name) {
-        this(name, true);
+        this(name, true, true);
     }
 
     @ParserConstructor
-    public TimeSeriesAggregationBuilder(String name, Boolean keyed) {
+    public TimeSeriesAggregationBuilder(String name, Boolean keyed, Boolean important) {
         super(name);
         this.keyed = keyed != null ? keyed : true;
+        this.important = important != null ? important : true;
     }
 
     protected TimeSeriesAggregationBuilder(
@@ -61,16 +66,19 @@ public class TimeSeriesAggregationBuilder extends AbstractAggregationBuilder<Tim
     ) {
         super(clone, factoriesBuilder, metadata);
         this.keyed = clone.keyed;
+        this.important = clone.important;
     }
 
     public TimeSeriesAggregationBuilder(StreamInput in) throws IOException {
         super(in);
         keyed = in.readBoolean();
+        important = in.readBoolean();
     }
 
     @Override
     protected void doWriteTo(StreamOutput out) throws IOException {
         out.writeBoolean(keyed);
+        out.writeBoolean(important);
     }
 
     @Override
@@ -86,6 +94,7 @@ public class TimeSeriesAggregationBuilder extends AbstractAggregationBuilder<Tim
     protected XContentBuilder internalXContent(XContentBuilder builder, Params params) throws IOException {
         builder.startObject();
         builder.field(KEYED_FIELD.getPreferredName(), keyed);
+        builder.field(IMPORTANT_FIELD.getPreferredName(), important);
         builder.endObject();
         return builder;
     }
@@ -108,6 +117,11 @@ public class TimeSeriesAggregationBuilder extends AbstractAggregationBuilder<Tim
     @Override
     public boolean isInSortOrderExecutionRequired() {
         return true;
+    }
+
+    @Override
+    public boolean shortcutResponses() {
+        return !important;
     }
 
     public boolean isKeyed() {

@@ -307,7 +307,7 @@ public class InternalCategorizationAggregation extends InternalMultiBucketAggreg
     }
 
     @Override
-    public InternalAggregation reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalAggregation doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         try (CategorizationBytesRefHash hash = new CategorizationBytesRefHash(new BytesRefHash(1L, reduceContext.bigArrays()))) {
             TokenListCategorizer categorizer = new TokenListCategorizer(
                 hash,

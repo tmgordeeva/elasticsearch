@@ -93,7 +93,7 @@ public class InternalGeoLine extends InternalAggregation implements GeoShapeMetr
     }
 
     @Override
-    public InternalAggregation reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalAggregation doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         int mergedSize = 0;
         boolean reducedComplete = true;
         boolean reducedIncludeSorts = true;

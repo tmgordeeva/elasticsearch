@@ -130,7 +130,7 @@ public class InternalPercentilesBucket extends InternalNumericMetricsAggregation
     }
 
     @Override
-    public Max reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public Max doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         throw new UnsupportedOperationException("Not supported");
     }
 

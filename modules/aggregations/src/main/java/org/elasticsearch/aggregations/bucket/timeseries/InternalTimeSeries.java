@@ -193,7 +193,7 @@ public class InternalTimeSeries extends InternalMultiBucketAggregation<InternalT
     }
 
     @Override
-    public InternalAggregation reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalAggregation doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         // TODO: optimize single result case either by having a if check here and return aggregations.get(0) or
         // by overwriting the mustReduceOnSingleInternalAgg() method
         final int initialCapacity = aggregations.stream()
@@ -217,6 +217,8 @@ public class InternalTimeSeries extends InternalMultiBucketAggregation<InternalT
         }
 
         InternalTimeSeries reduced = new InternalTimeSeries(name, new ArrayList<>(initialCapacity), keyed, getMetadata());
+        // Propagate aggregation builder for suppressing unimportant responses.
+        reduced.aggregationBuilder = aggregationBuilder;
         List<InternalBucket> bucketsWithSameKey = new ArrayList<>(aggregations.size());
         BytesRef prevTsid = null;
         while (pq.size() > 0) {

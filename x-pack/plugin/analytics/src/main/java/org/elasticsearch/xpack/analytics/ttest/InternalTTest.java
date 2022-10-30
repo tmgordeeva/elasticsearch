@@ -55,7 +55,7 @@ public class InternalTTest extends InternalNumericMetricsAggregation.SingleValue
     }
 
     @Override
-    public InternalTTest reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalTTest doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         TTestState reduced = state.reduce(aggregations.stream().map(a -> ((InternalTTest) a).state));
         return new InternalTTest(name, reduced, format, getMetadata());
     }

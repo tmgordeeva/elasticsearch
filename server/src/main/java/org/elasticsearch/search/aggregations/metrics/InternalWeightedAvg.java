@@ -74,7 +74,7 @@ public class InternalWeightedAvg extends InternalNumericMetricsAggregation.Singl
     }
 
     @Override
-    public InternalWeightedAvg reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalWeightedAvg doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         CompensatedSum sumCompensation = new CompensatedSum(0, 0);
         CompensatedSum weightCompensation = new CompensatedSum(0, 0);
 

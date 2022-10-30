@@ -242,7 +242,7 @@ public class InternalExtendedStats extends InternalStats implements ExtendedStat
     }
 
     @Override
-    public InternalExtendedStats reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalExtendedStats doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         double sumOfSqrs = 0;
         double compensationOfSqrs = 0;
         for (InternalAggregation aggregation : aggregations) {
@@ -260,7 +260,7 @@ public class InternalExtendedStats extends InternalStats implements ExtendedStat
                 sumOfSqrs = newSumOfSqrs;
             }
         }
-        final InternalStats stats = super.reduce(aggregations, reduceContext);
+        final InternalStats stats = super.doReduce(aggregations, reduceContext);
         return new InternalExtendedStats(
             name,
             stats.getCount(),

@@ -84,7 +84,7 @@ public abstract class InternalMappedRareTerms<A extends InternalRareTerms<A, B>,
     }
 
     @Override
-    public InternalAggregation reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalAggregation doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         Map<Object, List<B>> buckets = new HashMap<>();
         InternalRareTerms<A, B> referenceTerms = null;
         SetBackedScalingCuckooFilter filter = null;

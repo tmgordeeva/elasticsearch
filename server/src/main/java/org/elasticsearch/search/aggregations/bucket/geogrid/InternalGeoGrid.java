@@ -77,7 +77,7 @@ public abstract class InternalGeoGrid<B extends InternalGeoGridBucket> extends I
     }
 
     @Override
-    public InternalGeoGrid<B> reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalGeoGrid<B> doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         LongObjectPagedHashMap<List<InternalGeoGridBucket>> buckets = null;
         final BucketPriorityQueue<InternalGeoGridBucket> ordered;
         try {

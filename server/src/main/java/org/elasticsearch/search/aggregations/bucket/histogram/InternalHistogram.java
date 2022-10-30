@@ -454,7 +454,7 @@ public final class InternalHistogram extends InternalMultiBucketAggregation<Inte
     }
 
     @Override
-    public InternalAggregation reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalAggregation doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         List<Bucket> reducedBuckets = reduceBuckets(aggregations, reduceContext);
         boolean alreadyAccountedForBuckets = false;
         if (reduceContext.isFinalReduce()) {

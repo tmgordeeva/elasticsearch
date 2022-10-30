@@ -105,7 +105,7 @@ abstract class AbstractInternalTDigestPercentiles extends InternalNumericMetrics
     }
 
     @Override
-    public AbstractInternalTDigestPercentiles reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public AbstractInternalTDigestPercentiles doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         TDigestState merged = null;
         for (InternalAggregation aggregation : aggregations) {
             final AbstractInternalTDigestPercentiles percentiles = (AbstractInternalTDigestPercentiles) aggregation;

@@ -1392,7 +1392,7 @@ public abstract class AggregatorTestCase extends ESTestCase {
         }
 
         @Override
-        public InternalAggregation reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+        public InternalAggregation doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
             aggregations.forEach(ia -> { assertThat(((InternalAggCardinalityUpperBound) ia).cardinality, equalTo(cardinality)); });
             return new InternalAggCardinalityUpperBound(name, cardinality, metadata);
         }

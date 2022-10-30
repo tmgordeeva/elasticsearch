@@ -80,7 +80,7 @@ public class SumTests extends InternalAggregationTestCase<Sum> {
             aggregations.add(new Sum("dummy1", value, null, null));
         }
         Sum internalSum = new Sum("dummy", 0, null, null);
-        Sum reduced = internalSum.reduce(aggregations, null);
+        Sum reduced = (Sum) internalSum.reduce(aggregations, null);
         assertEquals(expected, reduced.value(), delta);
     }
 

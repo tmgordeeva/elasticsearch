@@ -111,7 +111,7 @@ public class InternalTopMetrics extends InternalMultiValueAggregation {
     }
 
     @Override
-    public InternalTopMetrics reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalTopMetrics doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         if (false == canLeadReduction()) {
             return this;
         }

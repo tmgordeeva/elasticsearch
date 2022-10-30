@@ -107,7 +107,7 @@ public final class InternalItemSetMapReduceAggregation<
     }
 
     @Override
-    public InternalAggregation reduce(List<InternalAggregation> aggregations, AggregationReduceContext aggReduceContext) {
+    public InternalAggregation doReduce(List<InternalAggregation> aggregations, AggregationReduceContext aggReduceContext) {
 
         Stream<MapFinalContext> contexts = aggregations.stream().map(agg -> {
             assert agg.getClass().equals(InternalItemSetMapReduceAggregation.class);

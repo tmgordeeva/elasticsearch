@@ -75,7 +75,7 @@ public class InternalRandomSampler extends InternalSingleBucketAggregation imple
     }
 
     @Override
-    public InternalAggregation reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalAggregation doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         long docCount = 0L;
         List<InternalAggregations> subAggregationsList = new ArrayList<>(aggregations.size());
         for (InternalAggregation aggregation : aggregations) {

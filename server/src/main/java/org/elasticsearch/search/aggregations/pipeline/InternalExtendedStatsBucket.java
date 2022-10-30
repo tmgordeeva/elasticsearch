@@ -46,7 +46,7 @@ public class InternalExtendedStatsBucket extends InternalExtendedStats implement
     }
 
     @Override
-    public InternalExtendedStats reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalExtendedStats doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         throw new UnsupportedOperationException("Not supported");
     }
 }

@@ -36,7 +36,7 @@ class UnmappedCategorizationAggregation extends InternalCategorizationAggregatio
     }
 
     @Override
-    public InternalAggregation reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalAggregation doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         return new UnmappedCategorizationAggregation(name, getRequiredSize(), getMinDocCount(), getSimilarityThreshold(), super.metadata);
     }
 

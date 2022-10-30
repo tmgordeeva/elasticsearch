@@ -122,6 +122,9 @@ public abstract class InternalMultiBucketAggregationTestCase<T extends InternalA
 
     public void testIterators() throws IOException {
         final T aggregation = createTestInstanceForXContent();
+        if (shortcutInstances()) {
+            return;
+        }
         assertMultiBucketsAggregations(aggregation, parseAndAssert(aggregation, false, false), true);
     }
 

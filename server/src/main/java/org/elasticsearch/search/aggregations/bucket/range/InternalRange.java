@@ -333,7 +333,7 @@ public class InternalRange<B extends InternalRange.Bucket, R extends InternalRan
 
     @SuppressWarnings("unchecked")
     @Override
-    public InternalAggregation reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalAggregation doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         reduceContext.consumeBucketsAndMaybeBreak(ranges.size());
         @SuppressWarnings("rawtypes")
         List<B>[] rangeList = new List[ranges.size()];

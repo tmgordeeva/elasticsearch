@@ -201,7 +201,7 @@ public class InternalStringStats extends InternalAggregation {
 
     @Override
     @SuppressWarnings("HiddenField")
-    public InternalStringStats reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalStringStats doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         long count = 0;
         long totalLength = 0;
         int minLength = Integer.MAX_VALUE;

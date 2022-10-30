@@ -10,6 +10,7 @@ package org.elasticsearch.aggregations.bucket.timeseries;
 
 import org.elasticsearch.search.aggregations.ParsedMultiBucketAggregation;
 import org.elasticsearch.xcontent.ObjectParser;
+import org.elasticsearch.xcontent.ParseField;
 import org.elasticsearch.xcontent.XContentParser;
 
 import java.io.IOException;
@@ -21,6 +22,7 @@ import java.util.TreeMap;
 public class ParsedTimeSeries extends ParsedMultiBucketAggregation<ParsedTimeSeries.ParsedBucket> {
 
     private transient Map<String, ParsedTimeSeries.ParsedBucket> bucketMap;
+    private boolean important = true;
 
     @Override
     public String getType() {
@@ -48,6 +50,7 @@ public class ParsedTimeSeries extends ParsedMultiBucketAggregation<ParsedTimeSer
         ParsedTimeSeries::new
     );
     static {
+        PARSER.declareBoolean((parsed, value) -> parsed.important = value, new ParseField("important"));
         declareMultiBucketAggregationFields(
             PARSER,
             parser -> ParsedTimeSeries.ParsedBucket.fromXContent(parser, false),

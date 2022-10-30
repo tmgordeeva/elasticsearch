@@ -17,6 +17,7 @@ import org.elasticsearch.search.aggregations.pipeline.PipelineAggregator.Pipelin
 import org.elasticsearch.search.aggregations.support.AggregationPath;
 import org.elasticsearch.search.aggregations.support.SamplingContext;
 import org.elasticsearch.search.sort.SortValue;
+import org.elasticsearch.xcontent.ToXContentObject;
 import org.elasticsearch.xcontent.XContentBuilder;
 
 import java.io.IOException;
@@ -34,6 +35,8 @@ public abstract class InternalAggregation implements Aggregation, NamedWriteable
     protected final String name;
 
     protected final Map<String, Object> metadata;
+
+    protected transient AggregationBuilder aggregationBuilder;
 
     /**
      * Constructs an aggregation result with a given name.
@@ -120,7 +123,15 @@ public abstract class InternalAggregation implements Aggregation, NamedWriteable
      *
      * @see #mustReduceOnSingleInternalAgg()
      */
-    public abstract InternalAggregation reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext);
+    public InternalAggregation reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+        // Some tests may have null reduceContext or builders.
+        if (reduceContext != null && reduceContext.builder() != null && reduceContext.builder().shortcutResponses()) {
+            aggregationBuilder = reduceContext.builder();
+        }
+        return doReduce(aggregations, reduceContext);
+    }
+
+    public abstract InternalAggregation doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext);
 
     /**
      * Called by the parent sampling context. Should only ever be called once as some aggregations scale their internal values
@@ -189,6 +200,13 @@ public abstract class InternalAggregation implements Aggregation, NamedWriteable
 
     @Override
     public final XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
+        if (aggregationBuilder != null && aggregationBuilder.shortcutResponses()) {
+            return builder;
+        }
+        return toXContentObject(builder, params);
+    }
+
+    private XContentBuilder toXContentObject(XContentBuilder builder, Params params) throws IOException {
         if (params.paramAsBoolean(RestSearchAction.TYPED_KEYS_PARAM, false)) {
             // Concatenates the type and the name of the aggregation (ex: top_hits#foo)
             builder.startObject(String.join(TYPED_KEYS_DELIMITER, getType(), getName()));
@@ -226,7 +244,13 @@ public abstract class InternalAggregation implements Aggregation, NamedWriteable
 
     @Override
     public String toString() {
-        return Strings.toString(this);
+        // Wrap toString ToXContent in case we are not actually generating XContent to send back.
+        return Strings.toString(new ToXContentObject() {
+            @Override
+            public XContentBuilder toXContent(XContentBuilder builder, Params params) throws IOException {
+                return toXContentObject(builder, params);
+            }
+        });
     }
 
     /**

@@ -317,6 +317,10 @@ public abstract class AggregationContext implements Releasable {
         return false;
     }
 
+    public boolean shortcutResponses() {
+        return false;
+    }
+
     /**
      * Implementation of {@linkplain AggregationContext} for production usage
      * that wraps our ubiquitous {@link SearchExecutionContext} and anything else

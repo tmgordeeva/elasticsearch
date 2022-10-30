@@ -89,7 +89,7 @@ public class InternalScriptedMetric extends InternalAggregation implements Scrip
     }
 
     @Override
-    public InternalAggregation reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalAggregation doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         List<Object> aggregationObjects = new ArrayList<>();
         for (InternalAggregation aggregation : aggregations) {
             InternalScriptedMetric mapReduceAggregation = (InternalScriptedMetric) aggregation;

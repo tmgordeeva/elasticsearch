@@ -80,7 +80,10 @@ public class InternalGeoCentroidTests extends InternalAggregationTestCase<Intern
             Long.MAX_VALUE,
             Collections.emptyMap()
         );
-        InternalCentroid reducedGeoCentroid = maxValueGeoCentroid.reduce(Collections.singletonList(maxValueGeoCentroid), null);
+        InternalCentroid reducedGeoCentroid = (InternalCentroid) maxValueGeoCentroid.reduce(
+            Collections.singletonList(maxValueGeoCentroid),
+            null
+        );
         assertThat(reducedGeoCentroid.count(), equalTo(Long.MAX_VALUE));
     }
 

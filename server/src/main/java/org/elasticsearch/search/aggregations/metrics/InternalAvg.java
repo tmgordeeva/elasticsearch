@@ -74,7 +74,7 @@ public class InternalAvg extends InternalNumericMetricsAggregation.SingleValue i
     }
 
     @Override
-    public InternalAvg reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalAvg doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         CompensatedSum kahanSummation = new CompensatedSum(0, 0);
         long count = 0;
         // Compute the sum of double values with Kahan summation algorithm which is more

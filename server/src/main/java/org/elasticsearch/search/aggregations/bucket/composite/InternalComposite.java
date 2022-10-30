@@ -188,7 +188,7 @@ public class InternalComposite extends InternalMultiBucketAggregation<InternalCo
     }
 
     @Override
-    public InternalAggregation reduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
+    public InternalAggregation doReduce(List<InternalAggregation> aggregations, AggregationReduceContext reduceContext) {
         PriorityQueue<BucketIterator> pq = new PriorityQueue<>(aggregations.size()) {
             @Override
             protected boolean lessThan(BucketIterator a, BucketIterator b) {
